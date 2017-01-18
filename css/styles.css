@@ -1,0 +1,104 @@
+body {
+    background-color: black;
+}
+
+.login-area {
+    color: white;
+}
+
+.post-title {
+    font-family: 'Slabo 27px', serif;}
+
+.post-content {
+    font-family: 'Slabo 27px', serif;
+}
+
+.post-id {
+    color: white;
+    text-align: right;
+}
+
+.post-id h3 {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    -webkit-margin-before: 0px !important;
+    -webkit-margin-after: 0px !important;
+    -webkit-margin-start: 0px !important;
+    -webkit-margin-end: 0px !important;
+}
+
+.comments {
+    margin: 50px 50px;
+}
+
+button {
+    background-color: black;
+    color: white;
+    font-size: 10px;
+}
+
+.buttons {
+    margin: 15px 15px;
+}
+
+.buttons form {
+    display: inline-block;
+}
+
+.commentButtons form {
+    display: inline-block;
+}
+
+#new_post_button {
+    padding: 10px 150px;
+    font-size: 24px;
+    font-family: 'Slabo 27px', serif;}
+}
+
+h2 {
+    color: white;
+}
+
+.post {
+    margin: 15px 15px;
+}
+
+.page-title {
+    color: #eb5e00;
+}
+
+#comment-author {
+    text-align: right;
+    color: #eb5e00;
+}
+
+/*
+I know the next section could be accomplished with less
+selectors but I'm still iterating on the site and am
+trying different styles for each of these
+*/
+
+p {
+    color: white;
+}
+
+.post-title {
+    color: #eb5e00;
+}
+
+.post-content {
+    color: white;
+}
+
+.post-id h3 {
+    color: #eb5e00;
+}
+
+.comments {
+    color: white;
+}
+
+form {
+    color: white;
+}

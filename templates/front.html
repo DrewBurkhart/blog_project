@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{{error}}
+
+  {% if not error %}
+    <form method= "post">
+       <center>
+           <button type="submit" name="newPost" value="New Post" id="new_post_button">New Post</button>
+       </center>
+    </form>
+    <hr><hr><hr>
+  {% endif %}
+
+<br>
+
+    {% for p in posts %}
+        {{ p.render() | safe }}
+
+    <br>
+    <div class="comments">
+      <h4>Comments</h4>
+      <hr>
+        {% for c in comments %}
+          {% if c.post|string() == p.key().id()|string() %}
+
+                {{c.comment}}
+                <br>
+                <div id="comment-author">
+                    {{c.author}}
+                </div>
+                <br><br>
+
+                <div class="commentButtons">
+                    <form method="get" action="/blog/{{p.key().id()}}/editcomment/{{c.key().id()}}">
+                        <button type="submit">Edit</button>
+                    </form>
+                    <form method="get" action="/blog/{{p.key().id()}}/deletecomment/{{c.key().id()}}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
+                <br>
+
+
+          {% endif %}
+        {% endfor  %}
+    </div>
+
+    <div class="buttons">
+        <form method="get" action="/blog/{{p.key().id()}}/editpost">
+            <button type="submit">Edit</button>
+        </form>
+        <form method="get" action="/blog/{{p.key().id()}}/comment">
+            <button type="submit">Comment</button>
+        </form>
+        <form method="get" action="/blog/{{p.key().id()}}/like">
+            <button type="submit">Like</button> {{p.likes}}
+        </form>
+        <form method="get" action="/blog/{{p.key().id()}}/dislike">
+            <button type="submit">Dislike</button> {{p.dislikes}}
+        </form>
+        <form method="get" action="/blog/{{p.key().id()}}/deletepost">
+            <button type="submit">Delete Post</button>
+        </form>
+    </div>
+    <br><br>
+    <hr><hr><hr>
+
+
+  {% endfor %}
+
+{% endblock %}

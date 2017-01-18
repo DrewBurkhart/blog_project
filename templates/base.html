@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Pacifico|Slabo+27px" rel="stylesheet">
+
+    <title>Shmeddit</title>
+</head>
+
+<body>
+    <header class="banner">
+        <a href="/blog" class="main-title">
+            <h1>Shmeddit</h1>
+        </a>
+    </header>
+
+    <div class="login-area">
+        {% if user %}
+        Welcome, {{user.name}} (<a class="login-link" href="/logout">logout</a>)
+        {% else %}
+        <a class="login-link" href="/login">Login </a>
+        |
+        <a class="login-link" href="/signup"> Signup</a>
+        {% endif %}
+    </div>
+
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer class="footer">
+        Shmeddit  ||||  Andrew Burkhart  ||||  Udacity FSND  ||||  2017
+    </footer>
+</body>
+
+</html>
