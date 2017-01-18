@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Sign Up</title>
+<link rel="stylesheet" href="/css/main.css" />
+<link rel="stylesheet" href="/css/styles.css" />
+<link href="https://fonts.googleapis.com/css?family=Dancing+Script|Pacifico|Slabo+27px" rel="stylesheet">
+
+</head>
+
+<body>
+    <header class="banner">
+        <a href="/blog" class="main-title">
+            <h1>Shmeddit</h1>
+        </a>
+    </header>
+    <div class="main-title">
+        <h1 class="page-title">Signup</h1>
+    </div>
+    <form method="post">
+        <table>
+            <tr>
+                <td class="label">
+                    Username
+                </td>
+                <td>
+                    <input type="text" name="username" value="{{username}}">
+                </td>
+                <td class="error">
+                    {{error_username}}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="label">
+                    Password
+                </td>
+                <td>
+                    <input type="password" name="password" value="">
+                </td>
+                <td class="error">
+                    {{error_password}}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="label">
+                    Re-enter Password
+                </td>
+                <td>
+                    <input type="password" name="reenter" value="">
+                </td>
+                <td class="error">
+                    {{error_reenter}}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="label">
+                    Email (optional)
+                </td>
+                <td>
+                    <input type="text" name="email" value="{{email}}">
+                </td>
+                <td class="error">
+                    {{error_email}}
+                </td>
+            </tr>
+        </table>
+
+        <input type="submit">
+    </form>
+    <br>
+    <p>
+        Already a member?
+    </p>
+    <form method="post" action="/login">
+        <button type="submit">Log In</button>
+    </form>
+    <br>
+    <form method="get" action="/blog">
+        <button type="submit">Back to Home</button>
+    </form>
+
+    <br><br>
+    <footer class="footer">
+        Shmeddit  ||||  Andrew Burkhart  ||||  Udacity FSND  ||||  2017
+    </footer>
+</body>
+
+</html>

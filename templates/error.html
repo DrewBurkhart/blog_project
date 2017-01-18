@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="error">
+    {{error}}
+</div>
+<form method="get" action="/blog">
+    <button type="submit">Back to Home</button>
+</form>
+
+{% endblock %}
