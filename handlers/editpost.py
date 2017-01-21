@@ -7,6 +7,7 @@ import time
 import webapp2
 import jinja2
 from handlers import BaseHandler
+from decorators import *
 from string import letters
 from google.appengine.ext import db
 
@@ -15,6 +16,8 @@ from google.appengine.ext import db
 def blog_key(name='default'):
     return db.Key.from_path('blogs', name)
 
+@post_exists
+@user_owns_post
 class EditPost(BaseHandler):
     def get(self, post_id):
 
@@ -24,23 +27,10 @@ class EditPost(BaseHandler):
         else:
             key = db.Key.from_path('Post', int(post_id), parent=blog_key())
             post = db.get(key)
+            error = ""
+            self.render("editpost.html", subject = post.subject,
+                        content = post.content, error = error)
 
-            if post is None:
-                self.redirect('/')
-
-            else:
-                author = post.author
-                loggedUser = self.user.name
-
-            if author == loggedUser:
-                key = db.Key.from_path('Post', int(post_id), parent=blog_key())
-                post = db.get(key)
-                error = ""
-                self.render("editpost.html", subject = post.subject,
-                            content = post.content, error = error)
-            else:
-                error = "You can only edit your own posts"
-                self.render("front.html", error = error)
 
     def post(self, post_id):
         key = db.Key.from_path('Post', int(post_id),

@@ -31,7 +31,6 @@ def blog_key(name='default'):
     return db.Key.from_path('blogs', name)
 
 
-
 class FrontPage(BaseHandler):
     def get(self):
         posts = db.GqlQuery("SELECT * FROM Post ORDER BY created DESC LIMIT 10")
@@ -71,7 +70,7 @@ app = webapp2.WSGIApplication([('/', MainPage),
                                ('/login', Login),
                                ('/error', Error),
                                ('/logout', Logout),
-                               ('/blog/([0-9]+)/', NewComment),
+                               ('/blog/([0-9]+)/comment', NewComment),
                                ('/blog/([0-9]+)/editcomment/([0-9]+)',
                                 EditComment),
                                ('/blog/([0-9]+)/deletecomment/([0-9]+)',

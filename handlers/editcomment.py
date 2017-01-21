@@ -7,11 +7,30 @@ import time
 import webapp2
 import jinja2
 from handlers import BaseHandler
+from decorators import *
 from string import letters
 from google.appengine.ext import db
 
 
 
+
+def blog_key(name='default'):
+    return db.Key.from_path('blogs', name)
+
+
+# Duplicate of comment class due to circular reference
+
+class Comment(db.Model):
+    comment = db.TextProperty()
+    post = db.StringProperty(required=True)
+    author = db.StringProperty(required=True)
+    created = db.DateTimeProperty(auto_now_add=True)
+
+# End of duplication
+
+
+@comment_exists
+@user_owns_comment
 class EditComment(BaseHandler):
     def get(self, post_id, comment_id):
         if not self.user:
