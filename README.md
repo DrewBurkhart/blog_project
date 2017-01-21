@@ -12,26 +12,28 @@ BurkhartFC@iCloud.com
 
 <h3><b>Contents:</b></h3>
 <i>blog.py</i>
-> The main file that contains all of the handlers for
-> the site and defines users, posts, comments, etc
+> The main file that contains all of the url maps and
+> splash page classes for the site
+
+<b>/decorators</b>
+
+> Decorators for error checking and validation
+
+<b>/handlers</b>
+
+> Unique classes for each handler to deal with
+> user behaviors
+
+<b>/models</b>
+
+> Unique classes to define each model
+> i.e. User, Post, Comment, etc.
 
 <b>/templates</b>
 
-<i>base.html</i>
-> Creates the primary structure that most of the
-> pages extend
-
-<i>front.html</i>
-> Creates the primary structure for the main page
-> of the blog displaying the most recent posts
-
-<i>comment.html, post.html, error.html</i>
-> Files that define each of their namesakes html
-> structure to pull into the other pages
-
-<i>editpost.html, newpost.html</i>
-> Pages that allow the user to complete the  
-> namesake task
+> HTML Templates to build the front end of the site
+> each inheriting from base.html
 
 <h3><b>Live Site<b></h3>
+> Currently under construction
 <a href="https://innate-buckeye-154719.appspot.com">Click Here</a>
