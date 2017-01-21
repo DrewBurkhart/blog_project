@@ -7,6 +7,7 @@ import time
 import webapp2
 import jinja2
 from handlers import BaseHandler
+from decorators import *
 # from models import Post
 from string import letters
 from google.appengine.ext import db
@@ -18,6 +19,10 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
 def render_str(template, **params):
     t = jinja_env.get_template(template)
     return t.render(params)
+
+
+
+# Duplicated 'Post' class due to circular reference
 
 class Post(db.Model):
     subject = db.StringProperty(required=True, multiline=True)
@@ -34,9 +39,13 @@ class Post(db.Model):
     	self._render_text = self.content.replace('\n', '<br>')
     	return render_str("post.html", p = self)
 
+# End of duplication
+
+
 def blog_key(name='default'):
     return db.Key.from_path('blogs', name)
 
+@post_exists
 class NewPost(BaseHandler):
     def get(self):
         if self.user:
