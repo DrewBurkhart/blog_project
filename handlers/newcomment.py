@@ -41,8 +41,8 @@ class Comment(db.Model):
 
 # End of duplication
 
-@comment_exists
 class NewComment(BaseHandler):
+    @user_logged_in
     def get(self, post_id):
         if not self.user:
             return self.redirect("/login")
