@@ -15,8 +15,9 @@ from google.appengine.ext import db
 def blog_key(name='default'):
     return db.Key.from_path('blogs', name)
 
-@post_exists
 class DislikePost(BaseHandler):
+    @post_exists
+    @user_owns_post
     def get(self, post_id):
 
         if not self.user:

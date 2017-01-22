@@ -29,9 +29,10 @@ class Comment(db.Model):
 # End of duplication
 
 
-@comment_exists
-@user_owns_comment
+
 class EditComment(BaseHandler):
+    @comment_exists
+    @user_owns_comment
     def get(self, post_id, comment_id):
         if not self.user:
             self.redirect('/login')

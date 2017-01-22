@@ -25,5 +25,6 @@ def comment_exists(function):
             return function(self, post_id, post)
         else:
             error = "This comment does not exist"
+            # print self
             self.render("front.html", error = error)
     return wrapper

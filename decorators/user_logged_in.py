@@ -23,5 +23,6 @@ def user_logged_in(function):
         if post:
             return function(self, post_id, post)
         else:
+            # print self
             self.redirect("/login")
     return wrapper
