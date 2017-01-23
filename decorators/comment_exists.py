@@ -18,13 +18,16 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
 
 
 def comment_exists(function):
-    def wrapper(self, post_id):
-        key = db.Key.from_path('Post', int(post_id))
+    def wrapper(self, post_id, comment_id):
+        key = db.Key.from_path('Post', int(post_id), parent=blog_key())
         post = db.get(key)
-        if post:
-            return function(self, post_id, post)
+        comment_key = db.Key.from_path('Comment', int(comment_id),
+                                parent=self.user.key())
+        comment = db.get(comment_key)
+
+        if comment is None:
+            self.redirect('/')
+
         else:
-            error = "This comment does not exist"
-            # print self
-            self.render("front.html", error = error)
+            return function(self, post_id, comment_id)
     return wrapper
