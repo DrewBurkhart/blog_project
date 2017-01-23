@@ -38,29 +38,10 @@ class EditComment(BaseHandler):
             self.redirect('/login')
 
         else:
-            key = db.Key.from_path('Post', int(post_id), parent=blog_key())
+            key = db.Key.from_path('Post', int(post_id), parent= blog_key())
             post = db.get(key)
-            comment_key = db.Key.from_path('Comment', int(comment_id),
-                                    parent=self.user.key())
-            comment = db.get(comment_key)
-
-            if comment is None:
-                self.redirect('/')
-
-            else:
-                author = comment.author
-                loggedUser = self.user.name
-
-                if author != loggedUser:
-                    error = "You can only edit your own comments"
-                    self.render("front.html", error = error)
-                    return
-
-                else:
-                    key = db.Key.from_path('Post', int(post_id), parent= blog_key())
-                    post = db.get(key)
-                    error = ""
-                    self.render("comment.html", comment = comment.comment)
+            error = ""
+            self.render("comment.html", comment = comment.comment)
 
     def post(self, post_id, comment_id):
         comment = Comment.get_by_id(int(comment_id), parent= self.user.key())

@@ -44,8 +44,6 @@ class Comment(db.Model):
 class NewComment(BaseHandler):
     @user_logged_in
     def get(self, post_id):
-        if not self.user:
-            return self.redirect("/login")
         post = Post.get_by_id(int(post_id), parent=blog_key())
 
         if post is None:
