@@ -7,6 +7,7 @@ import time
 import webapp2
 import jinja2
 from handlers import BaseHandler
+from models import User
 from string import letters
 from google.appengine.ext import db
 
@@ -20,6 +21,7 @@ def render_str(template, **params):
     return t.render(params)
 
 class Post(db.Model):
+    user = db.ReferenceProperty(User, collection_name='posts')
     subject = db.StringProperty(required=True, multiline=True)
     content = db.TextProperty(required=True)
     created = db.DateTimeProperty(auto_now_add=True)

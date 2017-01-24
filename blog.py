@@ -34,9 +34,9 @@ def blog_key(name='default'):
 class FrontPage(BaseHandler):
     def get(self):
         posts = db.GqlQuery("SELECT * FROM Post ORDER BY created DESC LIMIT 10")
-        comments = db.GqlQuery("SELECT * FROM Comment ORDER BY created ASC limit 10") #NOQA
+        # comments = db.GqlQuery("SELECT * FROM Comment ORDER BY created ASC limit 10") #NOQA
 
-        self.render('front.html', posts = posts, comments = comments)
+        self.render('front.html', posts = User.posts, comments = Post.comments)
 
     def post(self):
         newpost = self.request.get("newPost")
