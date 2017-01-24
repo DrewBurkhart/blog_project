@@ -22,32 +22,31 @@ def user_owns_post(function):
     def wrapper(self, post_id):
         key = db.Key.from_path('Post', int(post_id), parent=blog_key())
         post = db.get(key)
-
         author = post.author
         loggedUser = self.user.name
 
+        # Call the function that is passed to the decorator
+        function(self, post_id)
+
+        # Check to see which function called this decorator
+        # and return the appropriate response
         if author == loggedUser:
-            if function == EditPost:
+            if function.__name__ == 'EditPost' or function.__name__ == 'DeletePost':
                 return function(self, post_id)
-            elif function == DeletePost:
-                return function(self, post_id)
-            elif function == DislikePost:
-                error = "How about we just delete this one?"
+            elif function.__name__ == 'DislikePost':
+                error = "How about you just delete this one?"
                 self.render('error.html', error = error)
-            elif function == LikePost:
+            elif function.__name__ == 'LikePost':
                 error = "You can only like posts that you did not create"
                 self.render("error.html", error = error)
 
         else:
-            if function == EditPost:
+            if function.__name__ == 'EditPost':
                 error = "You can only edit your own posts"
                 self.render("front.html", error = error)
-            elif function == DeletePost:
+            elif function.__name__ == 'DeletePost':
                 error = "You can only delete your own posts"
                 self.render("front.html", error = error)
-            elif function == DislikePost:
+            elif function.__name__ == 'DislikePost' or function.__name__ == 'LikePost': #noqa
                 return function(self, post_id)
-            elif function == LikePost:
-                return function(self, post_id)
-
     return wrapper

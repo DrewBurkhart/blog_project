@@ -17,12 +17,10 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
                                autoescape=True)
 
 def user_logged_in(function):
-    def wrapper(self):
-
+    def wrapper(self, post_id):
         if self.user:
-            return function(self)
+            return function(self, post_id)
 
         else:
-            # print self
             self.redirect("/login")
     return wrapper
