@@ -18,8 +18,8 @@ def blog_key(name='default'):
 
 
 class EditPost(BaseHandler):
-    @post_exists
     @user_owns_post
+    @post_exists
     def get(self, post_id):
 
         if not self.user:

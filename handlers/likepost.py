@@ -17,7 +17,7 @@ def blog_key(name='default'):
 
 class LikePost(BaseHandler):
     @post_exists
-    @user_owns_post
+    @user_not_own_post
     def get(self, post_id):
             # checks user
         if not self.user:

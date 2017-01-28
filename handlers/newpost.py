@@ -46,14 +46,14 @@ def blog_key(name='default'):
     return db.Key.from_path('blogs', name)
 
 class NewPost(BaseHandler):
-    @user_logged_in
+    @user_not_logged_in
     def get(self):
         if self.user:
             self.render("newpost.html")
         else:
             self.redirect("/login")
 
-    @user_logged_in
+    @user_not_logged_in
     def post(self):
         if not self.user:
             return self.redirect('/login')

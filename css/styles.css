@@ -1,5 +1,5 @@
 body {
-    background-color: black;
+    background-color: #050E21;
 }
 
 .login-area {
@@ -33,7 +33,7 @@ body {
 }
 
 button {
-    background-color: black;
+    background-color: #050E21;
     color: white;
     font-size: 10px;
 }
