@@ -12,8 +12,6 @@ from string import letters
 from google.appengine.ext import db
 
 
-
-
 def blog_key(name='default'):
     return db.Key.from_path('blogs', name)
 
@@ -29,11 +27,12 @@ class Comment(db.Model):
 # End of duplication
 
 
-
 class EditComment(BaseHandler):
-    @comment_exists
     @user_owns_comment
+    @comment_exists
     def get(self, post_id, comment_id):
+        comment = Comment.get_by_id(int(comment_id), parent= self.user.key())
+
         if not self.user:
             self.redirect('/login')
 

@@ -33,7 +33,6 @@ class DeleteComment(BaseHandler):
             comment = Comment.get_by_id(int(comment_id),
                                         parent=self.user.key())
             key = db.Key.from_path('Post', int(post_id), parent=blog_key())
-            # post = db.get(key)
 
             if comment is None:
                 error = "You can only delete your own comments"

@@ -17,7 +17,7 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
 def blog_key(name='default'):
    return db.Key.from_path('blogs', name)
 
-def user_owns_post(function):
+def user_not_own_post(function):
     def wrapper(self, post_id):
         key = db.Key.from_path('Post', int(post_id), parent=blog_key())
         post = db.get(key)
@@ -25,8 +25,9 @@ def user_owns_post(function):
         loggedUser = self.user.name
 
         if author == loggedUser:
-            return function(self, post_id)
-        else:
-            error = "You can only edit your own posts"
+            error = "You can't like your own posts"
             self.render("front.html", error = error)
+        else:
+            return function(self, post_id)
+
     return wrapper

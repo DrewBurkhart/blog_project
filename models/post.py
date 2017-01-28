@@ -21,7 +21,6 @@ def render_str(template, **params):
     return t.render(params)
 
 class Post(db.Model):
-    user = db.ReferenceProperty(User, collection_name='posts')
     subject = db.StringProperty(required=True, multiline=True)
     content = db.TextProperty(required=True)
     created = db.DateTimeProperty(auto_now_add=True)
@@ -31,6 +30,7 @@ class Post(db.Model):
     dislikes = db.IntegerProperty(required=True)
     liked_by = db.ListProperty(str)
     disliked_by = db.ListProperty(str)
+
 
     def render(self):
     	self._render_text = self.content.replace('\n', '<br>')
