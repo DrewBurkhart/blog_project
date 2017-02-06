@@ -34,19 +34,7 @@ class DeleteComment(BaseHandler):
                                         parent=self.user.key())
             key = db.Key.from_path('Post', int(post_id), parent=blog_key())
 
-            if comment is None:
-                error = "You can only delete your own comments"
-                self.render("front.html", error = error)
-                return
-
-            author = comment.author
-            loggedUser = self.user.name
-
-            if author != loggedUser:
-                error = "You can only delete your own comments"
-                self.render("front.html", error = error)
-
-            elif comment:
+            if comment:
                 comment.delete()
                 self.redirect('/blog')
             else:

@@ -11,7 +11,6 @@ from string import letters
 from google.appengine.ext import db
 
 
-
 class CommentError(BaseHandler):
     def get(self):
         self.write("Something happened. I'm as lost as you are...")

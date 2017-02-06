@@ -31,13 +31,9 @@ class LikePost(BaseHandler):
                 error = "Something happened. I'm as lost as you are..."
                 self.render("error.html", error = error)
                 return
-            author = post.author
             logged_user = self.user.name
 
-            if author == logged_user:
-                error = "You can only like posts that you did not create"
-                self.render("error.html", error = error)
-            elif logged_user in post.liked_by:
+            if logged_user in post.liked_by:
                 error = "We get it, you REALLY like this post but once is good"
                 self.render("error.html", error = error)
 

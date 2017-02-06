@@ -30,10 +30,6 @@ class DeletePost(BaseHandler):
             if post is None:
                 self.redirect('/')
 
-            elif author != loggedUser:
-                error = "You can only delete your own posts"
-                self.render("front.html", error = error)
-
             else:
                 post.delete()
                 error = "Post has been deleted"
