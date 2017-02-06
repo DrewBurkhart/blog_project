@@ -54,9 +54,6 @@ class PostPage(BaseHandler):
 
 
 
-
-
-
 app = webapp2.WSGIApplication([('/', MainPage),
                                ('/blog/?', FrontPage),
                                ('/blog/([0-9]+)', PostPage),

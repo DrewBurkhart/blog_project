@@ -5,12 +5,10 @@ import hashlib
 import hmac
 import time
 import webapp2
-import jinja2
-from handlers import BaseHandler
-from models import Post
+# import jinja2
+# from handlers import BaseHandler
 from string import letters
 from google.appengine.ext import db
-
 
 
 class Comment(db.Model):

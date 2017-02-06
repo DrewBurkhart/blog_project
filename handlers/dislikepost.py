@@ -30,9 +30,6 @@ class DislikePost(BaseHandler):
             if post is None:
                 error = "Something happened. I'm as lost as you are..."
                 self.render("error.html", error = error)
-            elif post.author == self.user.name:
-                error = "How about we just delete this one?"
-                self.render('error.html', error = error)
             elif self.user.name in post.disliked_by:
                 error = "Ok Ok, you REALLY dislike this post but once is good"
                 self.render("error.html", error = error)

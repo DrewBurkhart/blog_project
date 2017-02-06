@@ -36,14 +36,8 @@ class EditPost(BaseHandler):
     def post(self, post_id):
         key = db.Key.from_path('Post', int(post_id),
                                 parent=blog_key())
-        post = db.get(key)
-        author = post.author
-        loggedUser = self.user.name
 
         if not self.user:
-            self.redirect("/login")
-
-        elif author != loggedUser:
             self.redirect("/login")
 
         else:

@@ -12,7 +12,6 @@ from string import letters
 from google.appengine.ext import db
 
 
-
 class Login(BaseHandler):
     def get(self):
         self.render('login-form.html')

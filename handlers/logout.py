@@ -11,7 +11,6 @@ from string import letters
 from google.appengine.ext import db
 
 
-
 class Logout(BaseHandler):
     def get(self):
         self.logout()

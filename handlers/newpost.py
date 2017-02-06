@@ -55,9 +55,6 @@ class NewPost(BaseHandler):
 
     @user_not_logged_in
     def post(self):
-        if not self.user:
-            return self.redirect('/login')
-
         subject = self.request.get('subject')
         content = self.request.get('content')
         author = self.user.name
@@ -72,4 +69,4 @@ class NewPost(BaseHandler):
         else:
             error = "Please enter both subject and some content"
             self.render(
-                "newpost.html", subject= subject, content= content, error= error)
+                "newpost.html", subject=subject, content=content, error=error)
