@@ -27,20 +27,19 @@ class Comment(db.Model):
 
 # End of duplication
 
+
+
 def user_owns_comment(function):
     def wrapper(self, post_id, comment_id):
-        # comment = Comment.get_by_id(int(comment_id), parent= self.user.key())
-        comment_key = db.Key.from_path('Comment', int(comment_id),
-                                parent=self.user.key())
-        comment = db.get(comment_key)
+        key = db.Key.from_path('Post', int(post_id), parent=blog_key())
+        comment = Comment.get_by_id(int(comment_id), parent=self.user.key())
         author = comment.author
         loggedUser = self.user.name
 
-        if author != loggedUser:
-            error = "You can only edit your own comments"
-            self.render("front.html", error = error)
-            return
+        if author == loggedUser:
+            return function(self, post_id, comment_id)
 
         else:
-            return function(self, post_id, comment_id)
+            error = "You can only edit your own comments"
+            self.render("front.html", error = error)
     return wrapper
