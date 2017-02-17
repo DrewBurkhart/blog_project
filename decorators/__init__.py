@@ -3,5 +3,5 @@ from comment_exists import comment_exists
 from user_owns_post import user_owns_post
 from user_logged_in import user_logged_in
 from user_not_logged_in import user_not_logged_in
-from user_owns_comment import user_owns_comment
+#from user_owns_comment import user_owns_comment
 from user_not_own_post import user_not_own_post

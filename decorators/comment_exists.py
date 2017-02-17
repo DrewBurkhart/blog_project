@@ -9,6 +9,7 @@ import jinja2
 from models import *
 from handlers import *
 from string import letters
+from functools import wraps
 from google.appengine.ext import db
 
 template_dir = os.path.join(os.path.dirname(__file__), '../templates')
@@ -18,16 +19,18 @@ def blog_key(name='default'):
     return db.Key.from_path('blogs', name)
 
 def comment_exists(function):
-    def wrapper(self, post_id, comment_id):
-        key = db.Key.from_path('Post', int(post_id), parent=blog_key())
-        post = db.get(key)
-        comment_key = db.Key.from_path('Comment', int(comment_id),
-                                parent=self.user.key())
-        comment = db.get(comment_key)
-
-        if comment is None:
-            self.redirect('/')
-
-        else:
-            return function(self, post_id, comment_id)
+    @wraps(function)
+    def wrapper(self, *args, **kwargs):
+        print args
+        # key = db.Key.from_path('Post', int(args[1]), parent=blog_key())
+        # post = db.get(key)
+        # comment_key = db.Key.from_path('Comment', int(args[2]),
+        #                         parent=self.user.key())
+        # comment = db.get(comment_key)
+        #
+        # if comment is None:
+        #     self.redirect('/')
+        #
+        # else:
+        return function(self, *args, **kwargs)
     return wrapper

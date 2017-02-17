@@ -27,7 +27,7 @@ class Comment(db.Model):
 
 class DeleteComment(BaseHandler):
     @comment_exists
-    @user_owns_comment
+    #@user_owns_comment
     def get(self, post_id, comment_id):
         if self.user:
             comment = Comment.get_by_id(int(comment_id),

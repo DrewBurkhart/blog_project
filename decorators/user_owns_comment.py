@@ -29,17 +29,18 @@ class Comment(db.Model):
 
 
 
-def user_owns_comment(function):
-    def wrapper(self, post_id, comment_id):
-        key = db.Key.from_path('Post', int(post_id), parent=blog_key())
-        comment = Comment.get_by_id(int(comment_id), parent=self.user.key())
-        author = comment.author
-        loggedUser = self.user.name
-
-        if author == loggedUser:
-            return function(self, post_id, comment_id)
-
-        else:
-            error = "You can only edit your own comments"
-            self.render("front.html", error = error)
-    return wrapper
+# def user_owns_comment(function):
+#     def wrapper(self, *args, **kwargs):
+#         key = db.Key.from_path('Post', int(args[0]), parent=blog_key())
+#         comment = Comment.get_by_id(int(args[1]), parent=self.user.key())
+#         if comment:
+#             author = comment.author #PROBLEM
+#         loggedUser = self.user.name
+#
+#         if author == loggedUser:
+#             return function(self, post_id, comment_id)
+#
+#         else:
+#             error = "You can only edit your own comments"
+#             self.render("front.html", error = error)
+#     return wrapper

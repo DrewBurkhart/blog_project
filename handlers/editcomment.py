@@ -6,6 +6,7 @@ import hmac
 import time
 import webapp2
 import jinja2
+# from models import Comment
 from handlers import BaseHandler
 from decorators import *
 from string import letters
@@ -18,20 +19,20 @@ def blog_key(name='default'):
 
 # Duplicate of comment class due to circular reference
 
-class Comment(db.Model):
-    comment = db.TextProperty()
-    post = db.StringProperty(required=True)
-    author = db.StringProperty(required=True)
-    created = db.DateTimeProperty(auto_now_add=True)
+# class Comment(db.Model):
+#     comment = db.TextProperty()
+#     post = db.StringProperty(required=True)
+#     author = db.StringProperty(required=True)
+#     created = db.DateTimeProperty(auto_now_add=True)
 
 # End of duplication
 
 
 class EditComment(BaseHandler):
-    @user_owns_comment
+    #@user_owns_comment
     @comment_exists
     def get(self, post_id, comment_id):
-        comment = Comment.get_by_id(int(comment_id), parent= self.user.key())
+        comment = comment.Comment.get_by_id(int(comment_id), parent=self.user.key())
 
         if not self.user:
             self.redirect('/login')
@@ -40,7 +41,10 @@ class EditComment(BaseHandler):
             key = db.Key.from_path('Post', int(post_id), parent= blog_key())
             post = db.get(key)
             error = ""
-            self.render("comment.html", comment = comment.comment)
+            if comment:
+                self.render("comment.html", comment = comment.comment)
+            else:
+                return self.error(404)
 
     def post(self, post_id, comment_id):
         comment = Comment.get_by_id(int(comment_id), parent= self.user.key())
