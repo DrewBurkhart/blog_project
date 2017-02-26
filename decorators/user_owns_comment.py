@@ -9,7 +9,7 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
 
 # Duplicate of comment class due to circular reference
 
-class Comment(db.Model): #pylint: disable=R0903
+class Comment(db.Model):
     """ Define the comment class """
     comment = db.TextProperty()
     post = db.StringProperty(required=True)

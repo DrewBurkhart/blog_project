@@ -8,7 +8,7 @@ def blog_key(name='default'):
     """ Define the blog key """
     return db.Key.from_path('blogs', name)
 
-class Comment(db.Model): #pylint: disable=R0903
+class Comment(db.Model):
     """ Duplicate Comment class due to circular reference """
     comment = db.TextProperty()
     post = db.StringProperty(required=True)

@@ -2,7 +2,7 @@
 from google.appengine.ext import db
 
 
-class Comment(db.Model): #pylint: disable=R0903
+class Comment(db.Model):
     """ Class for comments """
     comment = db.TextProperty()
     post = db.StringProperty(required=True)

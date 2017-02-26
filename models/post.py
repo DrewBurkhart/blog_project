@@ -13,7 +13,7 @@ def render_str(template, **params):
     t = jinja_env.get_template(template)
     return t.render(params)
 
-class Post(db.Model): #pylint: disable=R0903
+class Post(db.Model):
     """ Create the post class """
     subject = db.StringProperty(required=True, multiline=True)
     content = db.TextProperty(required=True)
