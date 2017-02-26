@@ -18,14 +18,14 @@ def blog_key(name='default'):
    return db.Key.from_path('blogs', name)
 
 def user_owns_post(function):
-    def wrapper(self, post_id):
-        key = db.Key.from_path('Post', int(post_id), parent=blog_key())
+    def wrapper(self, *args):
+        key = db.Key.from_path('Post', int(args[0]), parent=blog_key())
         post = db.get(key)
         author = post.author
         loggedUser = self.user.name
 
         if author == loggedUser:
-            return function(self, post_id)
+            return function(self, *args)
         else:
             error = "You can only edit your own posts"
             self.render("front.html", error = error)

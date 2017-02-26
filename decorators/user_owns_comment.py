@@ -14,8 +14,7 @@ from google.appengine.ext import db
 template_dir = os.path.join(os.path.dirname(__file__), '../templates')
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
                                autoescape=True)
-def blog_key(name='default'):
-   return db.Key.from_path('blogs', name)
+
 
 # Duplicate of comment class due to circular reference
 
@@ -27,17 +26,24 @@ class Comment(db.Model):
 
 # End of duplication
 
-
+def blog_key(name='default'):
+   return db.Key.from_path('blogs', name)
 
 def user_owns_comment(function):
-    def wrapper(self, post_id, comment_id):
-        key = db.Key.from_path('Post', int(post_id), parent=blog_key())
-        comment = Comment.get_by_id(int(comment_id), parent=self.user.key())
+    def wrapper(self, *args):
+        key = db.Key.from_path('Post', int(args[0]), parent=blog_key())
+        post = db.get(key)
+        comment_key = db.Key.from_path('Comment', int(args[1]),
+                                parent=self.user.key())
+        comment = db.get(comment_key)
+        print post
+        print comment
+        print self.user.key()
         author = comment.author
         loggedUser = self.user.name
 
         if author == loggedUser:
-            return function(self, post_id, comment_id)
+            return function(self, *args)
 
         else:
             error = "You can only edit your own comments"

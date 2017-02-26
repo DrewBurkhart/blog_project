@@ -18,12 +18,12 @@ def blog_key(name='default'):
     return db.Key.from_path('blogs', name)
 
 def post_exists(function):
-    def wrapper(self, post_id):
-        key = db.Key.from_path('Post', int(post_id), parent=blog_key())
+    def wrapper(self, *args):
+        key = db.Key.from_path('Post', int(args[0]), parent=blog_key())
         post = db.get(key)
 
         if post:
-            return function(self, post_id)
+            return function(self, *args)
 
         else:
             error = "This post does not exist"

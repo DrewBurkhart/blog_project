@@ -15,11 +15,11 @@ template_dir = os.path.join(os.path.dirname(__file__), '../templates')
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
                                autoescape=True)
 def blog_key(name='default'):
-   return db.Key.from_path('blogs', name)
+    return db.Key.from_path('blogs', name)
 
 def user_not_own_post(function):
-    def wrapper(self, post_id):
-        key = db.Key.from_path('Post', int(post_id), parent=blog_key())
+    def wrapper(self, *args):
+        key = db.Key.from_path('Post', int(args[0]), parent=blog_key())
         post = db.get(key)
         author = post.author
         loggedUser = self.user.name
@@ -28,6 +28,6 @@ def user_not_own_post(function):
             error = "You can't like your own posts"
             self.render("front.html", error = error)
         else:
-            return function(self, post_id)
+            return function(self, *args)
 
     return wrapper
