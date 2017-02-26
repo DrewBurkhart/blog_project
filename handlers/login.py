@@ -1,5 +1,6 @@
 """ Login Handler """
 from handlers import BaseHandler
+from models import User
 
 
 class Login(BaseHandler):

@@ -7,8 +7,10 @@
 
 <h3><b>Author:</b></h3>
 <h5>Andrew Burkhart</h5>
+<br>
 Full Stack Web Developer Student
-BurkhartFC@iCloud.com
+<br>
+<a href="mailto:BurkhartFC@iCloud.com" target="_top">E-mail Me</a>
 
 <h3><b>Contents:</b></h3>
 <i>blog.py</i>
@@ -38,10 +40,6 @@ BurkhartFC@iCloud.com
 
 > CSS files to define the styles for the site
 
-<b>/gae</b>
-
-> Google App Engine default files
 
 <h3><b>Live Site<b></h3>
-> Currently under construction
 <a href="https://innate-buckeye-154719.appspot.com">Click Here</a>
