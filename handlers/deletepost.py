@@ -1,6 +1,7 @@
 """ Delete Post Handler """
 from handlers import BaseHandler
 from google.appengine.ext import db
+from decorators import post_exists, user_owns_post
 
 
 def blog_key(name='default'):

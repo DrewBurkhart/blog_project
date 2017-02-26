@@ -1,6 +1,7 @@
 """ Delete Comment Handler """
 from handlers import BaseHandler
 from google.appengine.ext import db
+from decorators import comment_exists, user_owns_comment
 
 
 def blog_key(name='default'):
@@ -16,8 +17,8 @@ class Comment(db.Model): #pylint: disable=R0903
 
 class DeleteComment(BaseHandler):
     """ Handler to Delete a comment """
-    @comment_exists #pylint: disable=E0602
-    @user_owns_comment #pylint: disable=E0602
+    @comment_exists
+    @user_owns_comment
     def get(self, post_id, comment_id):
         """ Define the get method """
         if self.user:

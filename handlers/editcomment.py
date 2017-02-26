@@ -1,6 +1,7 @@
 """ Edit Comment Handler """
 from handlers import BaseHandler
 from google.appengine.ext import db
+from decorators import user_owns_comment, comment_exists
 
 
 def blog_key(name='default'):

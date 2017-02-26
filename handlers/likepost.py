@@ -1,6 +1,7 @@
 """ Like Post Handler """
 from handlers import BaseHandler
 from google.appengine.ext import db
+from decorators import post_exists, user_not_own_post
 
 
 def blog_key(name='default'):
@@ -20,7 +21,7 @@ class LikePost(BaseHandler):
 
             if post is None:
                 error = "Something happened. I'm as lost as you are..."
-                self.render("error.html", error = error)
+                self.render("error.html", error=error)
                 return
             logged_user = self.user.name
 

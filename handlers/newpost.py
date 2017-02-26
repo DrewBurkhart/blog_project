@@ -1,7 +1,9 @@
+""" New Post class """
 import os
 import jinja2
 from handlers import BaseHandler
 from google.appengine.ext import db
+from decorators import user_not_logged_in
 
 template_dir = os.path.join(os.path.dirname(__file__), '../templates')
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
