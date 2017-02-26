@@ -1,16 +1,6 @@
-import os
-import re
-import random
-import hashlib
-import hmac
-import time
-import webapp2
-import jinja2
+""" Delete Post Handler """
 from handlers import BaseHandler
-from decorators import *
-from string import letters
 from google.appengine.ext import db
-
 
 
 def blog_key(name='default'):
@@ -18,14 +8,15 @@ def blog_key(name='default'):
 
 
 class DeletePost(BaseHandler):
+    """ Class to delete post """
     @post_exists
     @user_owns_post
     def get(self, post_id):
         if self.user:
             key = db.Key.from_path('Post', int(post_id), parent=blog_key())
             post = db.get(key)
-            author = post.author
-            loggedUser = self.user.name
+            # author = post.author
+            # loggedUser = self.user.name
 
             if post is None:
                 self.redirect('/')
@@ -33,7 +24,7 @@ class DeletePost(BaseHandler):
             else:
                 post.delete()
                 error = "Post has been deleted"
-                self.render("front.html", error = error)
+                self.render("front.html", error=error)
 
         else:
             self.redirect('/login')

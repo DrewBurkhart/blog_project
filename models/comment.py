@@ -1,17 +1,9 @@
-import os
-import re
-import random
-import hashlib
-import hmac
-import time
-import webapp2
-# import jinja2
-# from handlers import BaseHandler
-from string import letters
+""" Comment class """
 from google.appengine.ext import db
 
 
-class Comment(db.Model):
+class Comment(db.Model): #pylint: disable=R0903
+    """ Class for comments """
     comment = db.TextProperty()
     post = db.StringProperty(required=True)
     author = db.StringProperty(required=True)

@@ -1,15 +1,6 @@
 import os
-import re
-import random
-import hashlib
-import hmac
-import time
-import webapp2
 import jinja2
 from handlers import BaseHandler
-from decorators import *
-# from models import Post
-from string import letters
 from google.appengine.ext import db
 
 template_dir = os.path.join(os.path.dirname(__file__), '../templates')
@@ -36,8 +27,8 @@ class Post(db.Model):
     disliked_by = db.ListProperty(str)
 
     def render(self):
-    	self._render_text = self.content.replace('\n', '<br>')
-    	return render_str("post.html", p = self)
+        self._render_text = self.content.replace('\n', '<br>')
+        return render_str("post.html", p=self)
 
 # End of duplication
 
@@ -61,8 +52,8 @@ class NewPost(BaseHandler):
 
         if subject and content:
             p = Post(parent=blog_key(), subject=subject,
-                content=content, author=author, likes=0,
-                dislikes=0, disliked_by=[], liked_by=[])
+                     content=content, author=author, likes=0,
+                     dislikes=0, disliked_by=[], liked_by=[])
             p.put()
             self.redirect('/blog/%s' % str(p.key().id()))
 

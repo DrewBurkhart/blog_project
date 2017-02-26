@@ -1,15 +1,5 @@
-import os
-import re
-import random
-import hashlib
-import hmac
-import time
-import webapp2
-import jinja2
+""" Register User Handler """
 from signup import Signup
-from models import *
-from string import letters
-from google.appengine.ext import db
 
 
 class Register(Signup):

@@ -1,14 +1,6 @@
+""" Post class """
 import os
-import re
-import random
-import hashlib
-import hmac
-import time
-import webapp2
 import jinja2
-from handlers import BaseHandler
-from models import User
-from string import letters
 from google.appengine.ext import db
 
 
@@ -17,10 +9,12 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
                                autoescape=True)
 
 def render_str(template, **params):
+    """ Define the render string function """
     t = jinja_env.get_template(template)
     return t.render(params)
 
-class Post(db.Model):
+class Post(db.Model): #pylint: disable=R0903
+    """ Create the post class """
     subject = db.StringProperty(required=True, multiline=True)
     content = db.TextProperty(required=True)
     created = db.DateTimeProperty(auto_now_add=True)
@@ -33,5 +27,6 @@ class Post(db.Model):
 
 
     def render(self):
-    	self._render_text = self.content.replace('\n', '<br>')
-    	return render_str("post.html", p = self)
+        """ Define the render function """
+        self._render_text = self.content.replace('\n', '<br>')
+        return render_str("post.html", p=self)

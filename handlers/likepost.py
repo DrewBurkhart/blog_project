@@ -1,14 +1,5 @@
-import os
-import re
-import random
-import hashlib
-import hmac
-import time
-import webapp2
-import jinja2
+""" Like Post Handler """
 from handlers import BaseHandler
-from decorators import *
-from string import letters
 from google.appengine.ext import db
 
 
@@ -35,7 +26,7 @@ class LikePost(BaseHandler):
 
             if logged_user in post.liked_by:
                 error = "We get it, you REALLY like this post but once is good"
-                self.render("error.html", error = error)
+                self.render("error.html", error=error)
 
             elif logged_user in post.disliked_by:
                 post.dislikes -= 1
@@ -45,9 +36,9 @@ class LikePost(BaseHandler):
                 post.put()
 
                 posts = db.GqlQuery("SELECT * FROM Post ORDER BY" +
-                                " created DESC limit 10")
+                                    " created DESC limit 10")
                 comments = db.GqlQuery("SELECT * FROM Comment ORDER BY" +
-                                " created ASC limit 10")
+                                       " created ASC limit 10")
 
                 self.render('front.html', posts=posts, comments=comments)
 
@@ -56,7 +47,7 @@ class LikePost(BaseHandler):
                 post.liked_by.append(logged_user)
                 post.put()
                 posts = db.GqlQuery("SELECT * FROM Post ORDER BY" +
-                                " created DESC limit 10")
+                                    " created DESC limit 10")
                 comments = db.GqlQuery("SELECT * FROM Comment ORDER BY" +
-                                " created ASC limit 10")
+                                       " created ASC limit 10")
                 self.render('front.html', posts=posts, comments=comments)

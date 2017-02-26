@@ -1,14 +1,5 @@
-import os
-import re
-import random
-import hashlib
-import hmac
-import time
-import webapp2
-import jinja2
+""" Dislike Post Handler """
 from handlers import BaseHandler
-from decorators import *
-from string import letters
 from google.appengine.ext import db
 
 
@@ -16,6 +7,7 @@ def blog_key(name='default'):
     return db.Key.from_path('blogs', name)
 
 class DislikePost(BaseHandler):
+    """ Class to dislike a post """
     @post_exists
     @user_not_own_post
     def get(self, post_id):

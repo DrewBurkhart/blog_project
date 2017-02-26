@@ -1,16 +1,9 @@
-import os
-import re
-import random
-import hashlib
-import hmac
-import time
-import webapp2
-import jinja2
+""" Comment Error class """
 from handlers import BaseHandler
-from string import letters
-from google.appengine.ext import db
 
 
 class CommentError(BaseHandler):
+    """ Create Comment Error class """
     def get(self):
+        """ Define the get method for this class """
         self.write("Something happened. I'm as lost as you are...")

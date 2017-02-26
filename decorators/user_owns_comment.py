@@ -1,14 +1,6 @@
+""" decorator """
 import os
-import re
-import random
-import hashlib
-import hmac
-import time
-import webapp2
 import jinja2
-import models
-from handlers import *
-from string import letters
 from google.appengine.ext import db
 
 template_dir = os.path.join(os.path.dirname(__file__), '../templates')
@@ -17,7 +9,8 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
 
 # Duplicate of comment class due to circular reference
 
-class Comment(db.Model):
+class Comment(db.Model): #pylint: disable=R0903
+    """ Define the comment class """
     comment = db.TextProperty()
     post = db.StringProperty(required=True)
     author = db.StringProperty(required=True)
@@ -26,14 +19,17 @@ class Comment(db.Model):
 # End of duplication
 
 def blog_key(name='default'):
-   return db.Key.from_path('blogs', name)
+    """ Define the blog key """
+    return db.Key.from_path('blogs', name)
 
 def user_owns_comment(function):
+    """ Validate that the user owns the comment """
     def wrapper(self, *args):
+        """ Define the wrapper """
         key = db.Key.from_path('Post', int(args[0]), parent=blog_key())
         post = db.get(key)
         comment_key = db.Key.from_path('Comment', int(args[1]),
-                                parent=self.user.key())
+                                       parent=self.user.key())
         comment = db.get(comment_key)
         print post
         print comment
@@ -46,5 +42,5 @@ def user_owns_comment(function):
 
         else:
             error = "You can only edit your own comments"
-            self.render("front.html", error = error)
+            self.render("front.html", error=error)
     return wrapper

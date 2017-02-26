@@ -1,14 +1,8 @@
+""" Main blog file """
 import os
-import re
-import random
-import hashlib
-import hmac
-import time
 import webapp2
 import jinja2
-from models import *
 from handlers import *
-from string import letters
 from google.appengine.ext import db
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
@@ -34,7 +28,7 @@ class FrontPage(BaseHandler):
         posts = db.GqlQuery("SELECT * FROM Post ORDER BY created DESC LIMIT 10")
         comments = db.GqlQuery("SELECT * FROM Comment ORDER BY created ASC limit 10") #NOQA
 
-        self.render('front.html', posts = posts, comments = comments)
+        self.render('front.html', posts=posts, comments=comments)
 
     def post(self):
         newpost = self.request.get("newPost")
@@ -50,7 +44,7 @@ class PostPage(BaseHandler):
 
         if not post:
             return self.error(404)
-        self.render("permalink.html", post = post)
+        self.render("permalink.html", post=post)
 
 
 
@@ -72,5 +66,5 @@ app = webapp2.WSGIApplication([('/', MainPage),
                                 DeleteComment),
                                ('/commenterror', CommentError),
                                ('/blog/([0-9]+)/deletepost', DeletePost)
-                               ],
-                               debug=True)
+                              ],
+                              debug=True)

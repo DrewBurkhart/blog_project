@@ -1,14 +1,5 @@
-import os
-import re
-import random
-import hashlib
-import hmac
-import time
-import webapp2
-import jinja2
+""" New Comment Handler """
 from handlers import BaseHandler
-from decorators import *
-from string import letters
 from google.appengine.ext import db
 
 
@@ -29,8 +20,8 @@ class Post(db.Model):
     disliked_by = db.ListProperty(str)
 
     def render(self):
-    	self._render_text = self.content.replace('\n', '<br>')
-    	return render_str("post.html", p = self)
+        self._render_text = self.content.replace('\n', '<br>')
+        return render_str("post.html", p=self)
 
 class Comment(db.Model):
     comment = db.TextProperty()
@@ -69,13 +60,13 @@ class NewComment(BaseHandler):
 
         if comment:
             author = self.user.name
-            c = Comment(comment= comment, post= post_id,
-                        author= author, parent= self.user.key())
+            c = Comment(comment=comment, post=post_id,
+                        author=author, parent=self.user.key())
             c.put()
             self.redirect('/blog')
 
         else:
             error = "I thought you wanted to comment?"
             self.render("comment.html",
-                        post = post,
-                        error = error)
+                        post=post,
+                        error=error)
