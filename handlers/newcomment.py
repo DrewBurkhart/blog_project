@@ -1,36 +1,13 @@
 """ New Comment Handler """
 from handlers import BaseHandler
 from google.appengine.ext import db
+from models import Post, Comment
 from decorators import user_logged_in
 
 
 def blog_key(name='default'):
     return db.Key.from_path('blogs', name)
 
-# Duplicate Post and Comment class due to circular reference
-
-class Post(db.Model):
-    subject = db.StringProperty(required=True, multiline=True)
-    content = db.TextProperty(required=True)
-    created = db.DateTimeProperty(auto_now_add=True)
-    last_modified = db.DateTimeProperty(auto_now=True)
-    author = db.StringProperty(required=True)
-    likes = db.IntegerProperty(required=True)
-    dislikes = db.IntegerProperty(required=True)
-    liked_by = db.ListProperty(str)
-    disliked_by = db.ListProperty(str)
-
-    def render(self):
-        self._render_text = self.content.replace('\n', '<br>')
-        return render_str("post.html", p=self)
-
-class Comment(db.Model):
-    comment = db.TextProperty()
-    post = db.StringProperty(required=True)
-    author = db.StringProperty(required=True)
-    created = db.DateTimeProperty(auto_now_add=True)
-
-# End of duplication
 
 class NewComment(BaseHandler):
     @user_logged_in

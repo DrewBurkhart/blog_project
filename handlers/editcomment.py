@@ -1,22 +1,12 @@
 """ Edit Comment Handler """
 from handlers import BaseHandler
 from google.appengine.ext import db
+from models import Comment
 from decorators import user_owns_comment, comment_exists
 
 
 def blog_key(name='default'):
     return db.Key.from_path('blogs', name)
-
-
-# Duplicate of comment class due to circular reference
-
-class Comment(db.Model):
-    comment = db.TextProperty()
-    post = db.StringProperty(required=True)
-    author = db.StringProperty(required=True)
-    created = db.DateTimeProperty(auto_now_add=True)
-
-# End of duplication
 
 
 class EditComment(BaseHandler):

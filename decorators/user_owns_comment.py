@@ -1,22 +1,12 @@
 """ decorator """
 import os
 import jinja2
+from models import Comment
 from google.appengine.ext import db
 
 template_dir = os.path.join(os.path.dirname(__file__), '../templates')
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
                                autoescape=True)
-
-# Duplicate of comment class due to circular reference
-
-class Comment(db.Model):
-    """ Define the comment class """
-    comment = db.TextProperty()
-    post = db.StringProperty(required=True)
-    author = db.StringProperty(required=True)
-    created = db.DateTimeProperty(auto_now_add=True)
-
-# End of duplication
 
 def blog_key(name='default'):
     """ Define the blog key """

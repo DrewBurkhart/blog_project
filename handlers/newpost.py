@@ -3,6 +3,7 @@ import os
 import jinja2
 from handlers import BaseHandler
 from google.appengine.ext import db
+from models import Post
 from decorators import user_not_logged_in
 
 template_dir = os.path.join(os.path.dirname(__file__), '../templates')
@@ -12,28 +13,6 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
 def render_str(template, **params):
     t = jinja_env.get_template(template)
     return t.render(params)
-
-
-
-# Duplicated 'Post' class due to circular reference
-
-class Post(db.Model):
-    subject = db.StringProperty(required=True, multiline=True)
-    content = db.TextProperty(required=True)
-    created = db.DateTimeProperty(auto_now_add=True)
-    last_modified = db.DateTimeProperty(auto_now=True)
-    author = db.StringProperty(required=True)
-    likes = db.IntegerProperty(required=True)
-    dislikes = db.IntegerProperty(required=True)
-    liked_by = db.ListProperty(str)
-    disliked_by = db.ListProperty(str)
-
-    def render(self):
-        self._render_text = self.content.replace('\n', '<br>')
-        return render_str("post.html", p=self)
-
-# End of duplication
-
 
 def blog_key(name='default'):
     return db.Key.from_path('blogs', name)
