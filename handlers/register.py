@@ -1,5 +1,6 @@
 """ Register User Handler """
 from signup import Signup
+from models import User
 
 
 class Register(Signup):

@@ -13,19 +13,21 @@ class EditComment(BaseHandler):
     @user_owns_comment
     @comment_exists
     def get(self, post_id, comment_id):
-        comment = Comment.get_by_id(int(comment_id), parent=self.user.key())
+        key = db.Key.from_path('Post', int(post_id), parent=blog_key())
+        post = db.get(key)
+        comment = Comment.get_by_id(int(comment_id), parent=post.key())
 
         if not self.user:
             self.redirect('/login')
 
         else:
-            key = db.Key.from_path('Post', int(post_id), parent=blog_key())
-            post = db.get(key)
             error = ""
             self.render("comment.html", comment=comment.comment)
 
     def post(self, post_id, comment_id):
-        comment = Comment.get_by_id(int(comment_id), parent=self.user.key())
+        key = db.Key.from_path('Post', int(post_id), parent=blog_key())
+        post = db.get(key)
+        comment = Comment.get_by_id(int(comment_id), parent=post.key())
         com = self.request.get("comment")
 
         if com:

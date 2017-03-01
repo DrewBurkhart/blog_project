@@ -14,10 +14,10 @@ def comment_exists(function):
     """ Validate if the comment exists """
     def wrapper(self, *args):
         """ Define wrapper """
-        # key = db.Key.from_path('Post', int(args[0]), parent=blog_key())
-        # post = db.get(key)
+        key = db.Key.from_path('Post', int(args[0]), parent=blog_key())
+        post = db.get(key)
         comment_key = db.Key.from_path('Comment', int(args[1]),
-                                       parent=self.user.key())
+                                       parent=post.key())
         comment = db.get(comment_key)
         # print comment
 

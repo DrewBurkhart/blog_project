@@ -39,7 +39,8 @@ class NewComment(BaseHandler):
         if comment:
             author = self.user.name
             c = Comment(comment=comment, post=post_id,
-                        author=author, parent=self.user.key())
+                        author=author, parent=key)
+            # print self.user
             c.put()
             self.redirect('/blog')
 
