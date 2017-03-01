@@ -6,7 +6,7 @@ body {
     width: 800px;
     margin: 0 auto;
     padding: 10px;
-    color: #333;
+    color: #eb5e00;
 }
 
 .login-area {
@@ -58,7 +58,7 @@ input[type=text] {
 
 textarea {
   width: 500px;
-  height: 400px;
+  height: 250px;
   font-size: 17px;
   font-family: monospace;
 }

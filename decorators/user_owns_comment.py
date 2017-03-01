@@ -16,21 +16,25 @@ def user_owns_comment(function):
     """ Validate that the user owns the comment """
     def wrapper(self, *args):
         """ Define the wrapper """
-        key = db.Key.from_path('Post', int(args[0]), parent=blog_key())
-        post = db.get(key)
-        comment_key = db.Key.from_path('Comment', int(args[1]),
-                                       parent=post.key())
-        comment = db.get(comment_key)
-        # print post
-        # print comment
-        # print self.user.key()
-        author = comment.author
-        loggedUser = self.user.name
-
-        if author == loggedUser:
-            return function(self, *args)
+        if not self.user:
+            self.redirect("/login")
 
         else:
-            error = "You can only edit your own comments"
-            self.render("front.html", error=error)
+            key = db.Key.from_path('Post', int(args[0]), parent=blog_key())
+            post = db.get(key)
+            comment_key = db.Key.from_path('Comment', int(args[1]),
+                                           parent=post.key())
+            comment = db.get(comment_key)
+            # print post
+            # print comment
+            # print self.user.key()
+            author = comment.author
+            loggedUser = self.user.name
+
+            if author == loggedUser:
+                return function(self, *args)
+
+            else:
+                error = "You can only edit your own comments"
+                self.render("front.html", error=error)
     return wrapper

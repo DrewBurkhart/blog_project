@@ -9,10 +9,10 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
 
 def user_not_logged_in(function):
     """ Check if the user is not logged in """
-    def wrapper(self):
+    def wrapper(self, *args, **kwargs):
         """ Define the wrapper """
         if self.user:
-            return function(self)
+            return function(self, *args, **kwargs)
 
         else:
             self.redirect("/login")

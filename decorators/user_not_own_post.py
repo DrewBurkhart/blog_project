@@ -14,15 +14,19 @@ def user_not_own_post(function):
     """ Check to see if the user does not own the post """
     def wrapper(self, *args):
         """ Define the wrapper """
-        key = db.Key.from_path('Post', int(args[0]), parent=blog_key())
-        post = db.get(key)
-        author = post.author
-        loggedUser = self.user.name
+        if not self.user:
+            self.redirect("/login")
 
-        if author == loggedUser:
-            error = "You can't like your own posts"
-            self.render("front.html", error=error)
         else:
-            return function(self, *args)
+            key = db.Key.from_path('Post', int(args[0]), parent=blog_key())
+            post = db.get(key)
+            author = post.author
+            loggedUser = self.user.name
+
+            if author == loggedUser:
+                error = "You can't like your own posts"
+                self.render("front.html", error=error)
+            else:
+                return function(self, *args)
 
     return wrapper

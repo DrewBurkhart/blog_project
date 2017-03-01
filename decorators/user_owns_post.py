@@ -14,14 +14,18 @@ def user_owns_post(function):
     """ Validate that the user owns the post """
     def wrapper(self, *args):
         """ Define the wrapper """
-        key = db.Key.from_path('Post', int(args[0]), parent=blog_key())
-        post = db.get(key)
-        author = post.author
-        loggedUser = self.user.name
+        if not self.user:
+            self.redirect("/login")
 
-        if author == loggedUser:
-            return function(self, *args)
         else:
-            error = "You can only edit your own posts"
-            self.render("front.html", error=error)
+            key = db.Key.from_path('Post', int(args[0]), parent=blog_key())
+            post = db.get(key)
+            author = post.author
+            loggedUser = self.user.name
+
+            if author == loggedUser:
+                return function(self, *args)
+            else:
+                error = "You can only edit your own posts"
+                self.render("front.html", error=error)
     return wrapper
