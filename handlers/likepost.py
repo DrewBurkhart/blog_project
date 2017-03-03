@@ -7,6 +7,7 @@ from decorators import post_exists, user_not_own_post
 def blog_key(name='default'):
     return db.Key.from_path('blogs', name)
 
+
 class LikePost(BaseHandler):
     @post_exists
     @user_not_own_post

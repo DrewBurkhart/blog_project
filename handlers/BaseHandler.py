@@ -14,15 +14,17 @@ template_dir = os.path.join(os.path.dirname(__file__), '../templates')
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
                                autoescape=True)
 
+
 def render_str(template, **params):
     """ Define the render string function """
     t = jinja_env.get_template(template)
     return t.render(params)
 
-# used for hashing password by making a salt and applying it to pw
+
 def make_salt(length=5):
     """ Make salt for hashing """
     return ''.join(random.choice(letters) for x in xrange(length))
+
 
 def make_pw_hash(name, pw, salt=None):
     """ Use salt to make hash """
@@ -31,27 +33,32 @@ def make_pw_hash(name, pw, salt=None):
     h = hashlib.sha256(name + pw + salt).hexdigest()
     return '%s,%s' % (salt, h)
 
+
 def valid_pw(name, password, h):
     """ Define valid password """
     salt = h.split(',')[0]
     return h == make_pw_hash(name, password, salt)
 
+
 def users_key(group='default'):
     """ Create the users_key """
     return db.Key.from_path('users', group)
 
-# Functions for hashing and passwords
+
 secret = 'ie7dj^uejd(92due63ye^&uejd7364@'
+
 
 def make_secure_val(val):
     """ Create a secure value """
     return '%s|%s' % (val, hmac.new(secret, val).hexdigest())
+
 
 def check_secure_val(secure_val):
     """ Check that secure value """
     val = secure_val.split('|')[0]
     if secure_val == make_secure_val(val):
         return val
+
 
 class BaseHandler(webapp2.RequestHandler):
     """ Main BaseHandler class that other classes will inherit from """

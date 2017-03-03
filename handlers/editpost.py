@@ -4,7 +4,6 @@ from google.appengine.ext import db
 from decorators import user_owns_post, post_exists
 
 
-
 def blog_key(name='default'):
     return db.Key.from_path('blogs', name)
 
@@ -23,7 +22,6 @@ class EditPost(BaseHandler):
             error = ""
             self.render("editpost.html", subject=post.subject,
                         content=post.content, error=error)
-
 
     def post(self, post_id):
         key = db.Key.from_path('Post', int(post_id),

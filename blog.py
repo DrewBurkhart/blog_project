@@ -9,6 +9,7 @@ template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
                                autoescape=True)
 
+
 def render_str(template, **params):
     t = jinja_env.get_template(template)
     return t.render(params)
@@ -25,8 +26,8 @@ def blog_key(name='default'):
 
 class FrontPage(BaseHandler):
     def get(self):
-        posts = db.GqlQuery("SELECT * FROM Post ORDER BY created DESC LIMIT 10")
-        comments = db.GqlQuery("SELECT * FROM Comment ORDER BY created ASC limit 10") #NOQA
+        posts = db.GqlQuery("SELECT * FROM Post ORDER BY created DESC LIMIT 10")  # NOQA
+        comments = db.GqlQuery("SELECT * FROM Comment ORDER BY created ASC limit 10")  # NOQA
 
         self.render('front.html', posts=posts, comments=comments)
 
@@ -47,7 +48,6 @@ class PostPage(BaseHandler):
         self.render("permalink.html", post=post)
 
 
-
 app = webapp2.WSGIApplication([('/', MainPage),
                                ('/blog/?', FrontPage),
                                ('/blog/([0-9]+)', PostPage),
@@ -66,5 +66,5 @@ app = webapp2.WSGIApplication([('/', MainPage),
                                 DeleteComment),
                                ('/commenterror', CommentError),
                                ('/blog/([0-9]+)/deletepost', DeletePost)
-                              ],
+                               ],
                               debug=True)

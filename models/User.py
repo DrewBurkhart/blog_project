@@ -11,6 +11,7 @@ def make_salt(length=5):
     """ Used for hashing password by making a salt and applying it to pw """
     return ''.join(random.choice(letters) for x in xrange(length))
 
+
 def make_pw_hash(name, pw, salt=None):
     """ Make hash for password """
     if not salt:
@@ -18,20 +19,25 @@ def make_pw_hash(name, pw, salt=None):
     h = hashlib.sha256(name + pw + salt).hexdigest()
     return '%s,%s' % (salt, h)
 
+
 def valid_pw(name, password, h):
     """ Define valid password """
     salt = h.split(',')[0]
     return h == make_pw_hash(name, password, salt)
 
+
 def users_key(group='default'):
     """ Create the users key """
     return db.Key.from_path('users', group)
 
+
 secret = 'ie7dj^uejd(92due63ye^&uejd7364@'
+
 
 def make_secure_val(val):
     """ Make a secure value """
     return '%s|%s' % (val, hmac.new(secret, val).hexdigest())
+
 
 def check_secure_val(secure_val):
     """ Check the secure value """
@@ -82,7 +88,7 @@ class UserHandler(webapp2.RequestHandler):
         self.user = uid and User.by_id(int(uid))
 
 
-#########USER#########
+# User
 
 # Defines User class and creates methods
 # to retrieve users and their info
@@ -117,6 +123,7 @@ class User(db.Model):
         u = cls.by_name(name)
         if u and valid_pw(name, pw, u.pw_hash):
             return u
+
 
 class Login(UserHandler):
     """ Create the login class """

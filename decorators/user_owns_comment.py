@@ -8,9 +8,11 @@ template_dir = os.path.join(os.path.dirname(__file__), '../templates')
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir),
                                autoescape=True)
 
+
 def blog_key(name='default'):
     """ Define the blog key """
     return db.Key.from_path('blogs', name)
+
 
 def user_owns_comment(function):
     """ Validate that the user owns the comment """
