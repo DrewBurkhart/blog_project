@@ -24,6 +24,8 @@ class EditComment(BaseHandler):
             error = ""
             self.render("comment.html", comment=comment.comment)
 
+    @user_owns_comment
+    @comment_exists
     def post(self, post_id, comment_id):
         key = db.Key.from_path('Post', int(post_id), parent=blog_key())
 

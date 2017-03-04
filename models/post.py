@@ -22,10 +22,19 @@ class Post(db.Model):
     created = db.DateTimeProperty(auto_now_add=True)
     last_modified = db.DateTimeProperty(auto_now=True)
     author = db.StringProperty(required=True)
-    likes = db.IntegerProperty(required=True)
-    dislikes = db.IntegerProperty(required=True)
+    # likes = db.IntegerProperty(required=True)
+    # dislikes = db.IntegerProperty(required=True)
     liked_by = db.ListProperty(str)
     disliked_by = db.ListProperty(str)
+
+
+    @property
+    def likes(self):
+        return len(self.liked_by)
+
+    @property
+    def dislikes(self):
+        return len(self.disliked_by)
 
     def render(self):
         """ Define the render function """

@@ -23,10 +23,7 @@ def blog_key(name='default'):
 class NewPost(BaseHandler):
     @user_not_logged_in
     def get(self):
-        if self.user:
-            self.render("newpost.html")
-        else:
-            self.redirect("/login")
+        self.render("newpost.html")
 
     @user_not_logged_in
     def post(self):

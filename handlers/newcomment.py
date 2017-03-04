@@ -2,7 +2,7 @@
 from handlers import BaseHandler
 from google.appengine.ext import db
 from models import Post, Comment
-from decorators import user_logged_in
+from decorators import user_logged_in, post_exists
 
 
 def blog_key(name='default'):
@@ -10,6 +10,7 @@ def blog_key(name='default'):
 
 
 class NewComment(BaseHandler):
+    @post_exists
     @user_logged_in
     def get(self, post_id):
         post = Post.get_by_id(int(post_id), parent=blog_key())
@@ -25,14 +26,11 @@ class NewComment(BaseHandler):
                         content=content,
                         comment="")
 
+    @post_exists
+    @user_logged_in
     def post(self, post_id):
         key = db.Key.from_path('Post', int(post_id), parent=blog_key())
         post = db.get(key)
-
-        if not post:
-            return self.error(404)
-        if not self.user:
-            return self.redirect("/login")
 
         comment = self.request.get("comment")
 

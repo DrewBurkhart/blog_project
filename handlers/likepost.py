@@ -31,9 +31,9 @@ class LikePost(BaseHandler):
                 self.render("error.html", error=error)
 
             elif logged_user in post.disliked_by:
-                post.dislikes -= 1
+                # post.dislikes -= 1
                 post.disliked_by.remove(logged_user)
-                post.likes += 1
+                # post.likes += 1
                 post.liked_by.append(logged_user)
                 post.put()
 
@@ -45,7 +45,7 @@ class LikePost(BaseHandler):
                 self.render('front.html', posts=posts, comments=comments)
 
             else:
-                post.likes += 1
+                # post.likes += 1
                 post.liked_by.append(logged_user)
                 post.put()
                 posts = db.GqlQuery("SELECT * FROM Post ORDER BY" +

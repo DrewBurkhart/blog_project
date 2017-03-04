@@ -28,9 +28,9 @@ class DislikePost(BaseHandler):
                 self.render("error.html", error = error)
 
             elif self.user.name in post.liked_by:
-                post.likes -= 1
+                # post.likes -= 1
                 post.liked_by.remove(self.user.name)
-                post.dislikes += 1
+                # post.dislikes += 1
                 post.disliked_by.append(self.user.name)
                 post.put()
 
@@ -42,7 +42,7 @@ class DislikePost(BaseHandler):
                 self.render('front.html', posts=posts, comments=comments)
 
             else:
-                post.dislikes += 1
+                # post.dislikes += 1
                 post.disliked_by.append(self.user.name)
                 post.put()
 
