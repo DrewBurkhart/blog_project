@@ -12,7 +12,6 @@ class LikePost(BaseHandler):
     @post_exists
     @user_not_own_post
     def get(self, post_id):
-            # checks user
         if not self.user:
             self.redirect('/login')
 
@@ -31,9 +30,7 @@ class LikePost(BaseHandler):
                 self.render("error.html", error=error)
 
             elif logged_user in post.disliked_by:
-                # post.dislikes -= 1
                 post.disliked_by.remove(logged_user)
-                # post.likes += 1
                 post.liked_by.append(logged_user)
                 post.put()
 
@@ -45,7 +42,6 @@ class LikePost(BaseHandler):
                 self.render('front.html', posts=posts, comments=comments)
 
             else:
-                # post.likes += 1
                 post.liked_by.append(logged_user)
                 post.put()
                 posts = db.GqlQuery("SELECT * FROM Post ORDER BY" +

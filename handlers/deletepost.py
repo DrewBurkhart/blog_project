@@ -16,8 +16,6 @@ class DeletePost(BaseHandler):
         if self.user:
             key = db.Key.from_path('Post', int(post_id), parent=blog_key())
             post = db.get(key)
-            # author = post.author
-            # loggedUser = self.user.name
 
             if post is None:
                 self.redirect('/')

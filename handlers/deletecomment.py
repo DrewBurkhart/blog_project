@@ -26,7 +26,6 @@ class DeleteComment(BaseHandler):
         if self.user:
             comment = Comment.get_by_id(int(comment_id),
                                         parent=self.user.key())
-            # key = db.Key.from_path('Post', int(post_id), parent=blog_key())
 
             if comment:
                 comment.delete()

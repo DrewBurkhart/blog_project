@@ -25,6 +25,5 @@ def post_exists(function):
 
         else:
             error = "This post does not exist"
-            # print self
             self.render("front.html", error=error)
     return wrapper

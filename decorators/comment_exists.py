@@ -22,7 +22,6 @@ def comment_exists(function):
         comment_key = db.Key.from_path('Comment', int(args[1]),
                                        parent=post.key())
         comment = db.get(comment_key)
-        # print comment
 
         if comment is None:
             self.redirect('/')

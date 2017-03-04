@@ -27,9 +27,6 @@ def user_owns_comment(function):
             comment_key = db.Key.from_path('Comment', int(args[1]),
                                            parent=post.key())
             comment = db.get(comment_key)
-            # print post
-            # print comment
-            # print self.user.key()
             author = comment.author
             loggedUser = self.user.name
 
