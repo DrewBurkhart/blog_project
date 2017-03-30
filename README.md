@@ -8,9 +8,9 @@
 <h3><b>Author:</b></h3>
 <h5>Andrew Burkhart</h5>
 <br>
-Full Stack Web Developer Student
+Full Stack Web Developer
 <br>
-<a href="mailto:BurkhartFC@iCloud.com" target="_top">E-mail Me</a>
+<a href="mailto:Andrew@Andrew-Burkhart.com" target="_top">E-mail Me</a>
 
 <h3><b>Contents:</b></h3>
 <i>blog.py</i>
