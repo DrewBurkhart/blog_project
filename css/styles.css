@@ -1,5 +1,5 @@
 body {
-    background-color: #050E21;
+    background-color: #050E21 !important;
 }
 
 .login-area {
@@ -79,6 +79,10 @@ selectors but I'm still iterating on the site and am
 trying different styles for each of these
 */
 
+h1 {
+    font-size: 100px;
+}
+
 p {
     color: white;
 }
@@ -101,4 +105,17 @@ p {
 
 form {
     color: white;
+}
+
+input[type=submit] {
+    background-color: inherit;
+    color: inherit;
+    font-family: inherit;
+    color: #eb5e00;
+}
+
+.shadow {
+    -webkit-box-shadow: 0 4px 16px -6px #eb5e00;
+    -moz-box-shadow: 0 4px 16px -6px #eb5e00;
+    box-shadow: 0 4px 16px -6px #eb5e00;
 }

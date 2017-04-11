@@ -45,8 +45,17 @@ label {
   font-size: 20px;
 }
 
+a:hover {
+    color: white;
+    text-decoration: none;
+}
+
 label + label {
     margin-top: 20px;
+}
+
+input, textarea {
+        color: black;
 }
 
 input[type=text] {

@@ -7,7 +7,7 @@
   {% if not error %}
     <form method= "post">
        <center>
-           <button type="submit" name="newPost" value="New Post" id="new_post_button">New Post</button>
+           <button type="submit" name="newPost" value="New Post" class="shadow" id="new_post_button">New Post</button>
        </center>
     </form>
     <hr><hr><hr>
@@ -49,19 +49,19 @@
 
     <div class="buttons">
         <form method="get" action="/blog/{{p.key().id()}}/editpost">
-            <button type="submit">Edit</button>
+            <button type="submit" class="shadow">Edit</button>
         </form>
         <form method="get" action="/blog/{{p.key().id()}}/comment">
-            <button type="submit">Comment</button>
+            <button type="submit" class="shadow">Comment</button>
         </form>
         <form method="get" action="/blog/{{p.key().id()}}/like">
-            <button type="submit">Like</button> {{p.likes}}
+            <button type="submit" class="shadow">Like</button> {{p.likes}}
         </form>
         <form method="get" action="/blog/{{p.key().id()}}/dislike">
-            <button type="submit">Dislike</button> {{p.dislikes}}
+            <button type="submit" class="shadow">Dislike</button> {{p.dislikes}}
         </form>
         <form method="get" action="/blog/{{p.key().id()}}/deletepost">
-            <button type="submit">Delete Post</button>
+            <button type="submit" class="shadow">Delete Post</button>
         </form>
     </div>
     <br><br>

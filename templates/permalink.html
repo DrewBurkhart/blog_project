@@ -6,19 +6,19 @@
         {{error}}
     </div>
     <div class="buttons">
-        <form method="get" action="/blog/{{post.key().id()}}/editpost">
+        <form method="get" class="shadow" action="/blog/{{post.key().id()}}/editpost">
             <button type="submit">Edit</button>
         </form>
-        <form method="get" action="/blog/{{post.key().id()}}/comment">
+        <form method="get" class="shadow" action="/blog/{{post.key().id()}}/comment">
             <button type="submit">Comment</button>
         </form>
-        <form method="get" action="/blog/{{post.key().id()}}/like">
+        <form method="get" class="shadow" action="/blog/{{post.key().id()}}/like">
             <button type="submit">Like</button> {{post.likes}}
         </form>
-        <form method="get" action="/blog/{{post.key().id()}}/dislike">
+        <form method="get" class="shadow" action="/blog/{{post.key().id()}}/dislike">
             <button type="submit">Dislike</button> {{post.dislikes}}
         </form>
-        <form method="get" action="/blog/{{post.key().id()}}/deletepost">
+        <form method="get" class="shadow" action="/blog/{{post.key().id()}}/deletepost">
             <button type="submit">Delete Post</button>
         </form>
     </div>
