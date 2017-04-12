@@ -2,28 +2,78 @@ body {
     position: relative;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 14px;
-
     width: 800px;
-    margin: 0 auto;
+    /*margin: 0 auto;*/
     padding: 10px;
     color: #eb5e00;
 }
 
-.login-area {
-    font-size: 13px;
-    color: white;
-    position: absolute;
-    top: 10px;
-    right: 10px;
+.container {
+    margin-left: 40px;
 }
 
-.login-link {
+.navbar {
+    min-height: 0;
+    border: 1px solid white;
+    padding: 10px;
+}
+
+.navbar-default {
+    background-color: #050E21;
+    border-color: #EB5E00;
+    margin: 5px;
+}
+
+.navbar-custom {
+    background-color: #050E21;
     color: white;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color: #EB5E00;
+}
+
+.navbar-custom .navbar-nav > .active > a {
+    color: white;
+    background-color:transparent;
+}
+
+.navbar-custom .navbar-nav > li > a:hover,
+.navbar-custom .navbar-nav > li > a:focus,
+.navbar-custom .navbar-nav > .active > a:hover,
+.navbar-custom .navbar-nav > .active > a:focus,
+.navbar-custom .navbar-nav > .open >a {
+    text-decoration: none;
+    background-color: #050E21;
+}
+
+.navbar-custom .navbar-brand {
+    color: white;
+}
+.navbar-custom .navbar-toggle {
+    background-color: #050E21;
+}
+.navbar-custom .icon-bar {
+    background-color: #050E21;
+}
+
+/*.login-area {
+    font-size: 13px;
+    color: white;
+    /*position: absolute;*/
+    top: 10px;
+    right: 10px;
+}*/
+
+.login-link {
+    color: #EB5E00;
     text-decoration: none;
 }
 
 .login-link:visited {
-    color: white;
+    color: #EB5E00;
 }
 
 .login-link:hover {
@@ -119,4 +169,5 @@ input[type=submit] {
     color: white;
     font-size: 14px;
     text-align: right;
+    margin-top: 20px;
 }

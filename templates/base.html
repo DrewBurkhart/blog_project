@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/styles.css" />
-    
+
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
@@ -18,21 +18,27 @@
 </head>
 
 <body>
+<div class="container">
+    <nav class="navbar navbar-custom login-area">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav navbar-right">
+                {% if user %}
+                Welcome, {{user.name}} (<a class="login-link" href="/logout">logout</a>)
+                {% else %}
+                <a class="login-link shadow" href="/login">Login </a>
+                |||
+                <a class="login-link shadow" href="/signup"> Signup</a>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+
     <header class="banner">
         <a href="/blog" class="main-title">
             <h1>Shmeddit</h1>
         </a>
     </header>
-
-    <div class="login-area">
-        {% if user %}
-        Welcome, {{user.name}} (<a class="login-link" href="/logout">logout</a>)
-        {% else %}
-        <a class="login-link shadow" href="/login">Login </a>
-        |
-        <a class="login-link shadow" href="/signup"> Signup</a>
-        {% endif %}
-    </div>
 
     <div id="content">
         {% block content %}
@@ -42,6 +48,8 @@
     <footer class="footer">
         Shmeddit  ||||  Andrew Burkhart  ||||  Udacity FSND  ||||  2017
     </footer>
+
+</div>
 </body>
 
 </html>
