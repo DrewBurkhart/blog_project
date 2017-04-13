@@ -171,3 +171,8 @@ input[type=submit] {
     text-align: right;
     margin-top: 20px;
 }
+
+mark {
+    color: #EB5E00;
+    background-color: inherit;
+}
