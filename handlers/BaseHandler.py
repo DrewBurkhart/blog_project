@@ -8,6 +8,7 @@ import webapp2
 import jinja2
 from models import User
 from google.appengine.ext import db
+import secret
 
 
 template_dir = os.path.join(os.path.dirname(__file__), '../templates')
@@ -43,9 +44,6 @@ def valid_pw(name, password, h):
 def users_key(group='default'):
     """ Create the users_key """
     return db.Key.from_path('users', group)
-
-
-secret = 'ie7dj^uejd(92due63ye^&uejd7364@'
 
 
 def make_secure_val(val):

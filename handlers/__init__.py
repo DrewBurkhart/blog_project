@@ -13,3 +13,4 @@ from newcomment import NewComment
 from newpost import NewPost
 from register import Register
 from signup import Signup
+from secret import secret

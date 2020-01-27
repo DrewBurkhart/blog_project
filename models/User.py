@@ -5,6 +5,7 @@ import hmac
 import webapp2
 from string import letters
 from google.appengine.ext import db
+import secret
 
 
 def make_salt(length=5):
@@ -29,9 +30,6 @@ def valid_pw(name, password, h):
 def users_key(group='default'):
     """ Create the users key """
     return db.Key.from_path('users', group)
-
-
-secret = 'ie7dj^uejd(92due63ye^&uejd7364@'
 
 
 def make_secure_val(val):
