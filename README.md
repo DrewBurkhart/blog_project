@@ -10,7 +10,7 @@
 <br>
 Full Stack Web Developer
 <br>
-<a href="mailto:Andrew@Andrew-Burkhart.com" target="_top">E-mail Me</a>
+<a href="mailto:Andrew.Burkhart@Outlook.com" target="_top">E-mail Me</a>
 
 <h3><b>Contents:</b></h3>
 <i>blog.py</i>
@@ -39,7 +39,3 @@ Full Stack Web Developer
 <b>/css</b>
 
 > CSS files to define the styles for the site
-
-
-<h3><b>Live Site<b></h3>
-<a href="https://innate-buckeye-154719.appspot.com">Click Here</a>
